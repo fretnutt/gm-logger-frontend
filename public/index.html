@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>GM Care Logger v14 (Final)</title>
+    <title>GM Care Logger v15 (Final Fix)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
 </head>
 <body>
     <main class="logger-container">
-        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-4">GM Customer Care Call Logger v14</h1>
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-4">GM Customer Care Call Logger v15</h1>
         
         <div class="mb-4">
             <label for="apiKey" class="block font-semibold text-gray-700 mb-2">Gemini API Key:</label>
@@ -124,7 +124,7 @@
                     }
 
                     // **THE FIX**: Use the correct, updated model name.
-                    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-pro-latest:generateContent?key=${apiKey}`;
+                    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
                     const prompt = `You are an expert in General Motors (GM) customer care terminology. Your task is to expand a line of shorthand notes into a full, readable sentence, focusing on vehicle issues, warranty claims, and service appointments. The user has provided the following line of shorthand: "${text}". Here is a list of custom, user-defined abbreviations that MUST be used if they appear: ${JSON.stringify(sessionAbbrs, null, 2)}. Please perform the following actions: 1. First, apply any applicable user-defined abbreviations from the list above. 2. Next, identify any remaining standard GM abbreviations (e.g., CU, LO, BIAX, SES, CE). 3. Expand all identified abbreviations into their most likely full form based on the context. 4. Combine the expanded text with any regular words to form a coherent, grammatically correct sentence or phrase. 5. If a word is not an abbreviation, keep it as is. Your final output must be ONLY the expanded sentence. Do not add any extra explanations, introductions, or markdown formatting. Example 1: Shorthand: "CU LO, CS CE" Your output: "Customer Update: Light On, Customer States: Check Engine". Example 2: Shorthand: "CR BIAX for SES light" Your output: "Customer Requests: Bring in as-is for Service Engine Soon light"`;
                     
                     const payload = { contents: [{ parts: [{ text: prompt }] }] };
